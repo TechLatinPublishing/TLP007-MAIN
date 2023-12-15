@@ -1,6 +1,6 @@
 module github.com/TechLatinPublishing/TLP007-MAIN
 
-go 1.21.5
+go 1.21
 
 require (
 	github.com/TechLatinPublishing/TLP006-MAIN-CONTENT v0.0.0-20231209014315-9950cf27b2c6 // indirect
