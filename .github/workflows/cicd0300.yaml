@@ -89,10 +89,10 @@ jobs:
         env:
  #         HUGO_ENVIRONMENT: ${{ env.HUGO_ENVIRONMENT }} 
  #         HUGO_ENV: ${{ env.HUGO_ENVIRONMENT }} 
-          HUGO_ENVIRONMENT: development
-          HUGO_ENV: development
-        #   HUGO_ENVIRONMENT: staging
-        #   HUGO_ENV: staging
+          # HUGO_ENVIRONMENT: development
+          # HUGO_ENV: development
+          HUGO_ENVIRONMENT: staging
+          HUGO_ENV: staging
         #   HUGO_ENVIRONMENT: production
         #   HUGO_ENV: production
 
