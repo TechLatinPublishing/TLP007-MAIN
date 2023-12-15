@@ -1,0 +1,4 @@
+[submodule "themes/TH006-beautifulhugo"]
+	path = themes/TH006-beautifulhugo
+	url = https://github.com/TechLatinPublishing/TH006-beautifulhugo
+	branch = Dev001

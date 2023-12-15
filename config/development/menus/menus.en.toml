@@ -1,0 +1,30 @@
+[[main]]
+  name = "CodeStuff"
+  url = "/code/"
+  weight = 1
+  identifier = "about"
+
+[[main]]
+  name = "Chalenges"
+  url = "chal"
+  weight = 2
+
+[[main]]
+  name = "Blog"
+  url = "blog"
+  weight = 3
+
+[[main]]
+  name = "About"
+  url = "page/about/"
+  weight = 4
+
+[[main]]
+  name = "samples"
+  url = "samp"
+  weight = 5
+
+[[main]]
+  name = "Tags"
+  url = "tags"
+  weight = 100

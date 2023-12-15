@@ -1,0 +1,4 @@
+  # publishDir = "gh-pages"
+  publishDir = "public"
+
+

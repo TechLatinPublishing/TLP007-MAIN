@@ -1,0 +1,150 @@
+name: Hugo Build cicd0100
+
+on:
+  #push:
+    # branches:
+      # - main
+      # - ver0200
+
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+# concurrency:
+#   group: "pages"
+#   cancel-in-progress: false
+
+# Default to bash
+defaults:
+  run:
+    shell: bash
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      GH_TOKEN: ${{ secrets.CICD0100_secret }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.21'
+          token: ${{ secrets.CICD0100_secret }}
+        env:
+          GH_TOKEN: ${{ secrets.CICD0100_secret }}
+
+
+    #   - name: Set up Go
+    #     uses: actions/setup-go@v2
+    #     with:
+    #       go-version: '1.17'
+    #       token: ${{ secrets.YOUR_PAT_SECRET }}
+
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          # hugo-version: 'latest'
+          hugo-version: 'v0.121.1'
+
+      - name: clean Modules - just removing theme.  should prob update content
+        run: make clean-submodule
+
+      - name: update/add Modules - fix to include content and static
+        run: make add-submodule
+
+      - name: hugo mod get
+        run: hugo mod get -u ./...   
+
+      - name: hugo mod tidy
+        run: hugo mod tidy 
+
+
+
+      # - name: Build - DEVELOPMENT
+      #   run: HUGO_ENV=development hugo --minify
+
+      # - name: Build - STAGING
+      #   run: HUGO_ENV=staging hugo --minify
+
+      # - name: Build - PRODUCTION
+      #   run: HUGO_ENV=production hugo --minify
+
+
+# =======================
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v4
+      - name: Install Node.js dependencies
+        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+      - name: Build with Hugo
+        env:
+          # For maximum backward compatibility with Hugo modules
+          HUGO_ENVIRONMENT: development
+          HUGO_ENV: development
+        run: |
+          hugo \
+            --gc \
+            --minify \
+            --baseURL "${{ steps.pages.outputs.base_url }}/"          
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./public
+
+
+
+# ==============================
+
+  # # Deployment job
+  # deploy:
+  #   environment:
+  #     name: github-pages
+  #     url: ${{ steps.deployment.outputs.page_url }}
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   steps:
+  #     - name: Deploy to GitHub Pages
+  #       id: deployment
+  #       uses: actions/deploy-pages@v3
+  #       with:
+  #         target_branch: gh-pages
+
+  # # Deploy job
+  # deploy:
+  #   # Add a dependency to the build job
+  #   needs: build
+
+  #   # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+  #   permissions:
+  #     pages: write      # to deploy to Pages
+  #     id-token: write   # to verify the deployment originates from an appropriate source
+
+  #   # Deploy to the github-pages environment
+  #   environment:
+  #     name: github-pages
+  #     url: ${{ steps.deployment.outputs.page_url }}
+
+  #   # Specify runner + deployment step
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Deploy to GitHub Pages
+  #       id: deployment
+  #       uses: actions/deploy-pages@v2 # or the latest "vX.X.X" version tag for this action
+
