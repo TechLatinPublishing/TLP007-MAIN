@@ -1,4 +1,4 @@
-.PHONY: clean-submodule add-submodule clean rebuildSM
+.PHONY: clean-submodule add-submodule clean rebuildSM makeNetlify
 
 clean-submodule:
 	@echo "Cleaning submodule..."
@@ -27,3 +27,14 @@ clean: clean-submodule
 	@echo "Cleaning Modules for git"
 	go mod tidy
 	@echo "Main modules cleaned."
+
+
+makeNetlify:clean-submodule add-submodule clean
+	@echo "Running makeNetlify"
+	@echo "running hugo "
+	hugo -e production
+	@echo "Built hugo"
+
+
+
+

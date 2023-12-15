@@ -91,32 +91,32 @@ pygmentsCodefencesGuessSyntax = true
 #    path = 'github.com/halogenica/beautifulhugo'
 [[module.imports]]
 #    path = 'github.com/TechLatinPublishing/TLP006-MAIN-CONTENT'
-    path = 'github.com/TechLatinPublishing/TLP006-MAIN-CONTENT'
+    path = 'github.com/TechLatinPublishing/TLP007-MAIN-CONTENT'
     [[module.imports.mounts]]
       source = "content"
       target = "content"
 
 [[module.imports]]
-    path = 'github.com/TechLatinPublishing/TLP006-Modifications'
+    path = 'github.com/TechLatinPublishing/TLP007-Modifications'
 #    path = 'https://github.com/vinceyoumans/CSHugo-Static'
 #    path = 'github.com/vinceyoumans/CSHugo-Static'
 
     [[module.imports.mounts]]
-      source = 'TLP006-MODS001/layouts'
+      source = 'TLP007-MODS001/layouts'
       target = 'layouts'
     [[module.imports.mounts]]
-      source = 'TLP006-MODS001/archetypes'
+      source = 'TLP007-MODS001/archetypes'
       target = 'archetypes'
     [[module.imports.mounts]]
-      source = 'TLP006-MODS001/static/development'
+      source = 'TLP007-MODS001/static/development'
       target = 'static'
     [[module.imports.mounts]]
-      source = 'TLP006-MODS001/data'
+      source = 'TLP007-MODS001/data'
       target = 'data'
     [[module.imports.mounts]]
-      source = 'TLP006-MODS001/assets'
+      source = 'TLP007-MODS001/assets'
       target = 'assets'
 #    [[module.imports.mounts]]
-#      source = 'TLP006-MODS001/i18n'
+#      source = 'TLP007-MODS001/i18n'
 #      target = 'i18n'
 
