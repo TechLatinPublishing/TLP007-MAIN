@@ -3,7 +3,22 @@
 
 
 
+
+## Add submodule for theme
+
+git submodule add -b Dev001 -f https://github.com/TechLatinPublishing/HTheme-beautifulhugo themes/HTheme-beautifulhugo
+
+
+git submodule add -b Dev001 -f https://github.com/TechLatinPublishing/TH006-beautifulhugo themes/TH006-beautifulhugo
+
+TH006-beautifulhugo
+
+
+
+
 ## Ceremony for reset
+
+
 
 
 make rebuildSM                             
