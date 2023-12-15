@@ -1,6 +1,6 @@
-baseURL = 'https://github.com/TechLatinPublishing/TLP-MAIN005.git'
+baseURL = 'https://github.com/TechLatinPublishing/TLP-MAIN007.git'
 languageCode = 'en'
-title = 'TLP-CSMAIN005 - _default'
+title = 'TLP-CSMAIN007 - _default'
 theme = 'TH006-beautifulhugo'
 
 pygmentsStyle = "trac"

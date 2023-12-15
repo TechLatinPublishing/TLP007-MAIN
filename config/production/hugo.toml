@@ -1,6 +1,6 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://tlp007.netlify.app/'
 languageCode = 'en-us'
-title = 'TLP-CSMAIN005 - PRODUCTION'
+title = 'TLP-CSMAIN007 - PRODUCTION'
 theme = 'TH006-beautifulhugo'
 
 pygmentsStyle = "trac"
