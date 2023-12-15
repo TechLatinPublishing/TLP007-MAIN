@@ -3,8 +3,8 @@ name: Hugo Build cicd0300
 on:
   push:
     branches:
-      # - main
-      - ver0300
+      - main
+      # - ver0300
 
   workflow_dispatch:
 
@@ -16,9 +16,9 @@ permissions:
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-# concurrency:
-#   group: "pages"
-#   cancel-in-progress: false
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 # Default to bash
 defaults:
@@ -41,7 +41,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v2
         with:
-          go-version: '1.17'
+          go-version: '1.21'
           token: ${{ secrets.CICD0100_secret }}
         env:
           GH_TOKEN: ${{ secrets.CICD0100_secret }}
@@ -162,5 +162,5 @@ jobs:
     needs: build
     steps:
       - name: Deploy to GitHub Pages
-        id: deployment
+        id: development
         uses: actions/deploy-pages@v3
