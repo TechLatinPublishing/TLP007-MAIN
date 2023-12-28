@@ -64,8 +64,8 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: 'v0.121.1'
-        #  hugo-version: 'latest'
+        #  hugo-version: 'v0.121.1'
+          hugo-version: 'latest'
 
 
 # - this step not necessary but in documentation.
@@ -133,7 +133,7 @@ jobs:
       # Upload a file to AWS s3
       - name:  Copy HUGO SITE to s3 Bucket 
         run: |
-          aws s3 cp ./index.html s3://${{ env.BUCKET_NAME }}/
+          aws s3 cp ./public/index.html s3://${{ env.BUCKET_NAME }}/
 # aws s3 cp ./public/* s3://${{ env.BUCKET_NAME }}/
         #   aws s3 cp ./index.html s3://${{ env.BUCKET_NAME }}/
 #   aws s3 cp ./README.md s3://${{ env.BUCKET_NAME }}/
