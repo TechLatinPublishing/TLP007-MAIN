@@ -72,14 +72,6 @@ jobs:
       - name: Install Dart Sass
         run: sudo snap install dart-sass
 
-
-
-
-
-
-
-
-
       - name: Git clone the repository
         uses: actions/checkout@v4
         with:
@@ -134,8 +126,8 @@ jobs:
       - name:  Copy HUGO SITE to s3 Bucket 
         run: |
           aws s3 cp ./public/index.html s3://${{ env.BUCKET_NAME }}/
-# aws s3 cp ./public/* s3://${{ env.BUCKET_NAME }}/
-        #   aws s3 cp ./index.html s3://${{ env.BUCKET_NAME }}/
+#   aws s3 cp ./public/* s3://${{ env.BUCKET_NAME }}/
+#   aws s3 cp ./index.html s3://${{ env.BUCKET_NAME }}/
 #   aws s3 cp ./README.md s3://${{ env.BUCKET_NAME }}/
 #   aws s3 cp ./README.md s3://${{ env.BUCKET_NAME }}/
 
