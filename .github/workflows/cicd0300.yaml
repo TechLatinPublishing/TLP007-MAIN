@@ -3,7 +3,7 @@ name: Hugo Build cicd0300
 on:
   push:
     branches:
-      - main
+      - mainxx
       # - ver0300
 
   workflow_dispatch:
