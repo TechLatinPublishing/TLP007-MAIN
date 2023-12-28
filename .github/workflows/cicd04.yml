@@ -125,7 +125,11 @@ jobs:
       # Upload a file to AWS s3
       - name:  Copy HUGO SITE to s3 Bucket 
         run: |
-          aws s3 cp "public" "s3://tlp.cs.007/" --recursive
+         aws s3 cp public/index.html s3://${{ env.BUCKET_NAME }}/
+
+
+
+#          aws s3 cp "public" "s3://tlp.cs.007/" --recursive  //works
 #          aws s3 cp "public/*" "s3://tlp.cs.007/" --recursive
 #          aws s3 cp "./public/*" "s3://tlp.cs.007/" --recursive
 #          aws s3 cp "public/*" "s3://tlp.cs.007/" --recursive
