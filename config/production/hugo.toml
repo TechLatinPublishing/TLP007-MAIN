@@ -1,6 +1,6 @@
 baseURL = 'http://tlp.cs.007.s3-website-us-east-1.amazonaws.com/'
 languageCode = 'en-us'
-title = 'TLP-CSMAIN007 - PRODUCTION'
+title = 'TLP-CSMAIN007 - PRODUCTION x'
 theme = 'TH006-beautifulhugo'
 
 pygmentsStyle = "trac"
