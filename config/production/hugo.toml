@@ -1,4 +1,4 @@
-baseURL = 'https://tlp007.netlify.app/'
+baseURL = 'http://tlp.cs.007.s3-website-us-east-1.amazonaws.com/'
 languageCode = 'en-us'
 title = 'TLP-CSMAIN007 - PRODUCTION'
 theme = 'TH006-beautifulhugo'
