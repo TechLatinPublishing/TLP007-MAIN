@@ -1,4 +1,4 @@
-baseURL = 'https://github.com/TechLatinPublishing/TLP-MAIN007.git'
+baseURL = 'http://tlp.cs.007.s3-website-us-east-1.amazonaws.com/'
 languageCode = 'en'
 title = 'TLP-CSMAIN007 - _default'
 theme = 'TH006-beautifulhugo'
