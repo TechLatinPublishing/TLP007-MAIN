@@ -1,0 +1,166 @@
+name: Hugo Build cicd0300
+
+on:
+  push:
+    branches:
+      - mainxx
+      # - ver0300
+
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+# Default to bash
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+
+    env:
+      HUGO_VERSION: 0.121.0
+      HUGO_ENVIRONMENT: development
+    #   GH_TOKEN: ${{ secrets.CICD0100_secret }}
+
+    steps:
+
+
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.21'
+          token: ${{ secrets.CICD0100_secret }}
+        env:
+          GH_TOKEN: ${{ secrets.CICD0100_secret }}
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+        #   hugo-version: 'v0.121.1'
+          hugo-version: 'latest'
+
+# - this step not necessary but in documentation.
+      - name: Install Dart Sass
+        run: sudo snap install dart-sass
+
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+
+      - name: Clean and Add Hugo Modules
+        run: make rebuildSM
+
+      - name: Hugo Module Commands
+        run: |
+          hugo mod get -u ./...
+          hugo mod tidy
+
+
+#=============================================
+
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v4
+
+      - name: Install Node.js Dependencies
+        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+
+#==============================
+
+      - name: Build with Hugo
+        env:
+ #         HUGO_ENVIRONMENT: ${{ env.HUGO_ENVIRONMENT }} 
+ #         HUGO_ENV: ${{ env.HUGO_ENVIRONMENT }} 
+          HUGO_ENVIRONMENT: development
+          HUGO_ENV: development
+          # HUGO_ENVIRONMENT: staging
+          # HUGO_ENV: staging
+          # HUGO_ENVIRONMENT: production
+          # HUGO_ENV: production
+
+
+
+        run: |
+          hugo \
+            --gc \
+            --minify \
+            --baseURL "${{ steps.pages.outputs.base_url }}/"
+
+
+#====================================
+    #   - name: Upload artifact
+    #     uses: actions/upload-artifact@v2
+    #     with:
+    #       name: gh-pages
+    #       path: ./public
+
+
+
+      - name: Upload artifact. v2
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./public
+
+
+# The following section is commented out since it's not clear whether you want to deploy to GitHub Pages or not.
+# Uncomment and modify this section if you want to deploy.
+#   deploy:
+#     environment:
+#       name: github-pages
+#       url: ${{ steps.deployment.outputs.page_url }}
+#     runs-on: ubuntu-latest
+#     needs: build
+#     steps:
+#       - name: Deploy to GitHub Pages
+#         id: deployment
+#         uses: actions/deploy-pages@v3
+#         with:
+#           target_branch: gh-pages
+
+
+#   deploy:
+#     environment:
+#       name: github-pages
+#       url: ${{ steps.deployment.outputs.page_url }}
+#     runs-on: ubuntu-latest
+#     needs: build
+#     steps:
+#         - name: Deploy to GitHub Pages
+#           id: deployment
+#           uses: actions/deploy-pages@v3
+#           with:
+#             deploy_key: ${{ secrets.GITHUB_TOKEN }}
+#             publish_dir: ./public
+#             cname: your-custom-domain.com  # Optional: Add this line if you have a custom domain
+
+
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: development
+        uses: actions/deploy-pages@v3
